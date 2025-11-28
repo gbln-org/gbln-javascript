@@ -1,0 +1,43 @@
+# Copyright (c) 2025 Vivian Burkhard Voss
+# SPDX-License-Identifier: Apache-2.0
+
+[package]
+name = "gbln-wasm"
+version = "0.1.0"
+edition = "2021"
+authors = ["Vivian Burkhard Voss <ask+gbln@vvoss.dev>"]
+license = "Apache-2.0"
+description = "WASM bindings for GBLN (Goblin Bounded Lean Notation)"
+repository = "https://github.com/gbln-org/gbln-javascript"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# GBLN core library (without compression features for WASM)
+gbln = { path = "../../../core/rust", default-features = false }
+
+# wasm-bindgen for Rust→JavaScript bindings
+wasm-bindgen = "0.2"
+
+# serde for JSON-like conversions
+serde = { version = "1.0", features = ["derive"] }
+serde-wasm-bindgen = "0.6"
+
+# JavaScript types
+js-sys = "0.3"
+
+[dependencies.web-sys]
+version = "0.3"
+features = ["console"]
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
+[profile.release]
+# Optimise for small WASM binary size
+opt-level = "z"     # Optimise for size
+lto = true          # Link-time optimisation
+codegen-units = 1   # Better optimisation
+panic = "abort"     # Smaller binary
+strip = true        # Remove debug symbols

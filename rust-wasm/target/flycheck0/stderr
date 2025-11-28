@@ -1,0 +1,5 @@
+    Blocking waiting for file lock on package cache
+   0.064329000s  INFO prepare_target{force=false package_id=gbln-wasm v0.1.0 (/Users/byvoss/Workbench/Unternehmen/ByVoss/Projekte/GBLN/bindings/javascript/rust-wasm) target="gbln_wasm"}: cargo::core::compiler::fingerprint: fingerprint dirty for gbln-wasm v0.1.0 (/Users/byvoss/Workbench/Unternehmen/ByVoss/Projekte/GBLN/bindings/javascript/rust-wasm)/Check { test: true }/TargetInner { name_inferred: true, ..: lib_target("gbln_wasm", ["cdylib", "rlib"], "/Users/byvoss/Workbench/Unternehmen/ByVoss/Projekte/GBLN/bindings/javascript/rust-wasm/src/lib.rs", Edition2021) }
+   0.064346750s  INFO prepare_target{force=false package_id=gbln-wasm v0.1.0 (/Users/byvoss/Workbench/Unternehmen/ByVoss/Projekte/GBLN/bindings/javascript/rust-wasm) target="gbln_wasm"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+    Checking gbln-wasm v0.1.0 (/Users/byvoss/Workbench/Unternehmen/ByVoss/Projekte/GBLN/bindings/javascript/rust-wasm)
+error: could not compile `gbln-wasm` (lib test) due to 2 previous errors; 3 warnings emitted

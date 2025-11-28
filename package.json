@@ -1,43 +1,31 @@
 {
-  "name": "@gbln/core",
+  "name": "gbln",
   "version": "0.1.0",
-  "description": "JavaScript/TypeScript bindings for GBLN (Goblin Bounded Lean Notation)",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./wasm": {
-      "import": "./dist/wasm/gbln.wasm"
-    }
-  },
+  "description": "GBLN - Goblin Bounded Lean Notation for JavaScript. Type-safe, memory-efficient, LLM-native data format.",
+  "main": "src/index.js",
+  "type": "module",
+  "types": "src/types/index.d.ts",
   "files": [
-    "dist",
-    "LICENSE",
-    "README.md"
+    "src/",
+    "pkg/",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "build": "npm run build:wasm && npm run build:js",
-    "build:wasm": "bash scripts/build-wasm.sh",
-    "build:js": "tsc && rollup -c",
-    "test": "jest",
-    "test:node": "jest --testEnvironment=node",
-    "test:browser": "jest --testEnvironment=jsdom",
-    "lint": "eslint src --ext .ts,.js",
-    "format": "prettier --write 'src/**/*.{ts,js}'",
-    "typecheck": "tsc --noEmit"
+    "build": "npm run build:wasm",
+    "build:wasm": "cd rust-wasm && wasm-pack build --target nodejs --out-dir ../pkg/nodejs --out-name gbln --release",
+    "build:wasm:web": "cd rust-wasm && wasm-pack build --target web --out-dir ../pkg/web --out-name gbln --release",
+    "build:wasm:bundler": "cd rust-wasm && wasm-pack build --target bundler --out-dir ../pkg/bundler --out-name gbln --release",
+    "test": "node test/simple.test.js"
   },
   "keywords": [
     "gbln",
-    "serialization",
     "parser",
-    "llm",
+    "serialization",
     "wasm",
-    "typescript"
+    "type-safe",
+    "llm",
+    "data-format"
   ],
   "author": "Vivian Burkhard Voss <ask+gbln@vvoss.dev>",
   "license": "Apache-2.0",
@@ -45,25 +33,11 @@
     "type": "git",
     "url": "https://github.com/gbln-org/gbln-javascript.git"
   },
+  "homepage": "https://github.com/gbln-org/gbln-javascript#readme",
   "bugs": {
     "url": "https://github.com/gbln-org/gbln-javascript/issues"
   },
-  "homepage": "https://gbln.dev",
-  "devDependencies": {
-    "@types/jest": "^29.5.0",
-    "@types/node": "^20.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.50.0",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "prettier": "^3.0.0",
-    "rollup": "^4.0.0",
-    "@rollup/plugin-typescript": "^11.0.0",
-    "ts-jest": "^29.1.0",
-    "typescript": "^5.2.0"
-  },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=14.0.0"
   }
 }
