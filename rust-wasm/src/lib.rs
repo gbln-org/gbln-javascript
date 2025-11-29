@@ -2,18 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use gbln::{parse as gbln_parse, to_string, to_string_pretty, Value};
-use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
-
-/// Initialise WASM module.
-///
-/// This is called automatically when the module loads.
-#[wasm_bindgen(start)]
-pub fn init() {
-    // Set panic hook for better error messages in the browser console
-    #[cfg(feature = "console_error_panic_hook")]
-    console_error_panic_hook::set_once();
-}
 
 /// Parse GBLN string to JavaScript value.
 ///
@@ -28,7 +17,7 @@ pub fn init() {
 ///
 /// # Example (JavaScript)
 /// ```js
-/// import { parse } from 'gbln-wasm';
+/// import { parse } from 'gbln';
 ///
 /// const data = parse('user{id<u32>(123)name<s64>(Alice)}');
 /// console.log(data.user.name); // 'Alice'
@@ -53,7 +42,7 @@ pub fn parse(input: &str) -> Result<JsValue, JsValue> {
 ///
 /// # Example (JavaScript)
 /// ```js
-/// import { toString } from 'gbln-wasm';
+/// import { toString } from 'gbln';
 ///
 /// const data = { user: { id: 123, name: 'Alice' } };
 /// const gbln = toString(data);
@@ -69,17 +58,16 @@ pub fn to_string_js(value: JsValue) -> Result<String, JsValue> {
 ///
 /// # Arguments
 /// * `value` - JavaScript object/array/primitive
-/// * `indent` - Number of spaces for indentation (default: 2)
 ///
 /// # Returns
 /// Pretty-printed GBLN string with newlines and indentation
 ///
 /// # Example (JavaScript)
 /// ```js
-/// import { toStringPretty } from 'gbln-wasm';
+/// import { toStringPretty } from 'gbln';
 ///
 /// const data = { user: { id: 123, name: 'Alice' } };
-/// const gbln = toStringPretty(data, 4);
+/// const gbln = toStringPretty(data);
 /// ```
 #[wasm_bindgen(js_name = toStringPretty)]
 pub fn to_string_pretty_js(value: JsValue) -> Result<String, JsValue> {
