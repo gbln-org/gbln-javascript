@@ -147,8 +147,6 @@ fn js_to_value(js_val: JsValue) -> Result<Value, JsValue> {
     if let Some(n) = js_val.as_f64() {
         // Check if it's an integer
         if n.fract() == 0.0 && n.is_finite() {
-            let n_i64 = n as i64;
-
             // Auto-select smallest type that fits
             if n >= 0.0 {
                 // Unsigned
