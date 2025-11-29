@@ -31,3 +31,6 @@ yarn-debug.log*
 # Temporary files
 *.tmp
 .cache/
+
+# Rust build artifacts
+rust-wasm/target/
