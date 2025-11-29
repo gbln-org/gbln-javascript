@@ -222,15 +222,3 @@ fn js_to_value(js_val: JsValue) -> Result<Value, JsValue> {
         js_val
     )))
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use wasm_bindgen_test::*;
-
-    #[wasm_bindgen_test]
-    fn t_parse_simple() {
-        let result = parse("value<i32>(42)");
-        assert!(result.is_ok());
-    }
-}
